@@ -70,7 +70,7 @@ const drawExample = async (
     //      See more info in the docs
     const xAxis = new CategoryAxis(wasmContext, {
         visibleRange: new NumberRange(0, POINTS_LOOP),
-        isVisible: false
+        isVisible: true
     });
     sciChartSurface.xAxes.add(xAxis);
 
@@ -78,22 +78,22 @@ const drawExample = async (
     const yAxisHeartRate = new NumericAxis(wasmContext, {
         id: "yHeartRate",
         visibleRange: new NumberRange(0.7, 1.0),
-        isVisible: false
+        isVisible: true
     });
     const yAxisBloodPressure = new NumericAxis(wasmContext, {
         id: "yBloodPressure",
         visibleRange: new NumberRange(0.4, 0.8),
-        isVisible: false
+        isVisible: true
     });
     const yAxisBloodVolume = new NumericAxis(wasmContext, {
         id: "yBloodVolume",
         visibleRange: new NumberRange(0.1, 0.5),
-        isVisible: false
+        isVisible: true
     });
     const yAxisBloodOxygenation = new NumericAxis(wasmContext, {
         id: "yBloodOxygenation",
         visibleRange: new NumberRange(0, 0.2),
-        isVisible: false
+        isVisible: true
     });
     sciChartSurface.layoutManager!.rightOuterAxesLayoutStrategy = new RightAlignedOuterVerticallyStackedAxisLayoutStrategy();
     sciChartSurface.yAxes.add(yAxisHeartRate, yAxisBloodPressure, yAxisBloodVolume, yAxisBloodOxygenation);
