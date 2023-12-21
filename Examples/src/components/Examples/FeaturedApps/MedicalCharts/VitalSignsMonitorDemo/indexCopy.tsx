@@ -11,10 +11,10 @@ import {
     NumericAxis,
     RightAlignedOuterVerticallyStackedAxisLayoutStrategy,
     SciChartSurface,
-    XyDataSeries,
+    XyDataSeries
 } from "scichart";
 
-const divElementId = "chart";
+// const divElementId = "chart";
 const STEP = 10;
 const TIMER_TIMEOUT_MS = 20;
 const STROKE_THICKNESS = 4;
@@ -22,12 +22,7 @@ const POINTS_LOOP = 5200;
 const GAP_POINTS = 50;
 const DATA_LENGTH = vitalSignsEcgData.xValues.length;
 
-const {
-    ecgHeartRateValues,
-    bloodPressureValues,
-    bloodVolumeValues,
-    bloodOxygenationValues
-} = vitalSignsEcgData;
+const { ecgHeartRateValues, bloodPressureValues, bloodVolumeValues, bloodOxygenationValues } = vitalSignsEcgData;
 
 // HELPER FUNCTIONS
 const getValuesFromData = (xIndex: number) => {
@@ -56,6 +51,8 @@ const getValuesFromData = (xIndex: number) => {
 
 // SCICHART
 const drawExample = async (
+    divElementId: string,
+    currentPointRef: React.MutableRefObject<number>,
     setInfoEcg: React.Dispatch<React.SetStateAction<number>>,
     setInfoBloodPressure1: React.Dispatch<React.SetStateAction<number>>,
     setInfoBloodPressure2: React.Dispatch<React.SetStateAction<number>>,
@@ -183,9 +180,9 @@ const drawExample = async (
     const runUpdateDataOnTimeout = () => {
         // Get data
         const { xArr, ecgHeartRateArr, bloodPressureArr, bloodVolumeArr, bloodOxygenationArr } = getValuesFromData(
-            currentPoint
+            currentPointRef.current
         );
-        currentPoint += STEP;
+        currentPointRef.current += STEP;
 
         // appendRange when fifoSweepingMode = true and fifoCapacity is reached will cause the series to wrap around
         dataSeries1.appendRange(xArr, ecgHeartRateArr);
@@ -194,7 +191,7 @@ const drawExample = async (
         dataSeries4.appendRange(xArr, bloodOxygenationArr);
 
         // Update Info panel
-        if (currentPoint % 1000 === 0) {
+        if (currentPointRef.current % 1000 === 0) {
             const ecg = ecgHeartRateArr[STEP - 1];
             setInfoEcg(Math.floor(ecg * 20));
             const bloodPressure = bloodPressureArr[STEP - 1];
@@ -210,7 +207,7 @@ const drawExample = async (
 
     const handleStop = () => {
         clearTimeout(timerId);
-        timerId = undefined;
+        timerId = null;
     };
 
     const handleStart = () => {
@@ -223,10 +220,14 @@ const drawExample = async (
     return { sciChartSurface, wasmContext, controls: { handleStart, handleStop } };
 };
 
-let currentPoint = 0;
-
+interface Props {
+    divElementId: string;
+}
 // REACT COMPONENT
-export default function VitalSignsMonitorDemo() {
+export default function VitalSignsMonitorDemoCopy({ divElementId: index }: Props) {
+    const [divElementId] = React.useState(`chart-${index}`);
+    const currentPointRef = React.useRef<number>(0);
+
     const sciChartSurfaceRef = React.useRef<SciChartSurface>();
     const controlsRef = React.useRef<{ handleStart: () => void; handleStop: () => void }>();
 
@@ -240,6 +241,9 @@ export default function VitalSignsMonitorDemo() {
         let autoStartTimerId: NodeJS.Timeout;
 
         const chartInitializationPromise = drawExample(
+            divElementId,
+            // timerIdRef,
+            currentPointRef,
             setInfoEcg,
             setInfoBloodPressure1,
             setInfoBloodPressure2,
