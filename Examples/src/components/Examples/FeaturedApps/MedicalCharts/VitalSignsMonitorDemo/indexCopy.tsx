@@ -279,7 +279,7 @@ export default function VitalSignsMonitorDemoCopy({ divElementId: index }: Props
         <div className={classes.ChartWrapper}>
             <div style={{ display: "flex", height: "100%" }}>
                 <div id={divElementId} className={classes.VitalSigns} />
-                <div className={classes.InfoBoxContainer}>
+                {/* <div className={classes.InfoBoxContainer}>
                     <div
                         className={classes.InfoBox}
                         style={{ color: appTheme.VividOrange, background: appTheme.Background }}
@@ -359,7 +359,7 @@ export default function VitalSignsMonitorDemoCopy({ divElementId: index }: Props
                             <div className={classes.IbRow2Col2}>{infoBloodOxygenation}</div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );
