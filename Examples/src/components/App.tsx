@@ -23,6 +23,7 @@ import Gallery from "./Gallery/Gallery";
 import { PAGES } from "./AppRouter/pages";
 import { GalleryItem } from "../helpers/types/types";
 import { allGalleryItems, getSeeAlsoGalleryItems } from "../helpers/SciChartExamples";
+import TestPage from "./TestPage";
 
 export default function App() {
     const location = useLocation();
@@ -89,6 +90,9 @@ export default function App() {
             setOpenedMenuItems(updatedOpenedItems);
         }
     }, [currentExampleId]);
+
+    // for test
+    return <TestPage />;
 
     if (isIFrame) {
         return <AppRouter currentExample={currentExample} seeAlso={seeAlso} isIFrame={true} />;
