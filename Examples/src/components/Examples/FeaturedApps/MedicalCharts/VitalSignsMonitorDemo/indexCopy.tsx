@@ -70,7 +70,13 @@ const drawExample = async (
     //      See more info in the docs
     const xAxis = new CategoryAxis(wasmContext, {
         visibleRange: new NumberRange(0, POINTS_LOOP),
-        isVisible: true
+        isVisible: true,
+        useNativeText: true,
+        drawMinorTickLines: false,
+        drawMinorGridLines: false,
+        drawMajorTickLines: false,
+        drawMajorGridLines: false,
+        drawMajorBands: false
     });
     sciChartSurface.xAxes.add(xAxis);
 
@@ -78,22 +84,46 @@ const drawExample = async (
     const yAxisHeartRate = new NumericAxis(wasmContext, {
         id: "yHeartRate",
         visibleRange: new NumberRange(0.7, 1.0),
-        isVisible: true
+        isVisible: true,
+        useNativeText: true,
+        drawMinorTickLines: false,
+        drawMinorGridLines: false,
+        drawMajorTickLines: false,
+        drawMajorGridLines: false,
+        drawMajorBands: false
     });
     const yAxisBloodPressure = new NumericAxis(wasmContext, {
         id: "yBloodPressure",
         visibleRange: new NumberRange(0.4, 0.8),
-        isVisible: true
+        isVisible: true,
+        useNativeText: true,
+        drawMinorTickLines: false,
+        drawMinorGridLines: false,
+        drawMajorTickLines: false,
+        drawMajorGridLines: false,
+        drawMajorBands: false
     });
     const yAxisBloodVolume = new NumericAxis(wasmContext, {
         id: "yBloodVolume",
         visibleRange: new NumberRange(0.1, 0.5),
-        isVisible: true
+        isVisible: true,
+        useNativeText: true,
+        drawMinorTickLines: false,
+        drawMinorGridLines: false,
+        drawMajorTickLines: false,
+        drawMajorGridLines: false,
+        drawMajorBands: false
     });
     const yAxisBloodOxygenation = new NumericAxis(wasmContext, {
         id: "yBloodOxygenation",
         visibleRange: new NumberRange(0, 0.2),
-        isVisible: true
+        isVisible: true,
+        useNativeText: true,
+        drawMinorTickLines: false,
+        drawMinorGridLines: false,
+        drawMajorTickLines: false,
+        drawMajorGridLines: false,
+        drawMajorBands: false
     });
     sciChartSurface.layoutManager!.rightOuterAxesLayoutStrategy = new RightAlignedOuterVerticallyStackedAxisLayoutStrategy();
     sciChartSurface.yAxes.add(yAxisHeartRate, yAxisBloodPressure, yAxisBloodVolume, yAxisBloodOxygenation);
